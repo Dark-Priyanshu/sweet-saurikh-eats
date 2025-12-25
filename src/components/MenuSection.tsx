@@ -5,10 +5,10 @@ import snacksImage from "@/assets/snacks.jpg";
 import heroSweets from "@/assets/hero-sweets.jpg";
 
 const menuCategories = [
-  { id: "sweets", label: "Sweets (मिठाई)" },
-  { id: "namkeen", label: "Namkeen & Snacks" },
-  { id: "fastfood", label: "Fast Food" },
-  { id: "beverages", label: "Beverages" }
+  { id: "sweets", label: "Sweets", labelHi: "मिठाई" },
+  { id: "namkeen", label: "Snacks", labelHi: "नमकीन" },
+  { id: "fastfood", label: "Fast Food", labelHi: "फास्ट फूड" },
+  { id: "beverages", label: "Drinks", labelHi: "पेय" }
 ];
 
 const menuItems = {
@@ -59,18 +59,18 @@ const MenuSection = () => {
   const [activeCategory, setActiveCategory] = useState("sweets");
 
   return (
-    <section id="menu" className="py-16 md:py-24 bg-background">
+    <section id="menu" className="py-12 sm:py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
         <AnimatedSection animation="fade-up">
-          <div className="text-center mb-12">
-            <span className="text-secondary font-medium uppercase tracking-wider text-sm">
+          <div className="text-center mb-8 sm:mb-12">
+            <span className="text-secondary font-medium uppercase tracking-wider text-xs sm:text-sm">
               Our Specialties
             </span>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-3 sm:mb-4">
               Explore Our Menu
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base px-4">
               Discover our wide range of traditional sweets, savory snacks, and delicious fast food items
             </p>
           </div>
@@ -78,24 +78,26 @@ const MenuSection = () => {
 
         {/* Category Tabs */}
         <AnimatedSection animation="fade-up" delay={100}>
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
+          <div className="flex justify-center gap-1.5 sm:gap-2 mb-8 sm:mb-10 flex-wrap">
             {menuCategories.map((category) => (
               <Button
                 key={category.id}
                 variant={activeCategory === category.id ? "default" : "outline"}
                 onClick={() => setActiveCategory(category.id)}
-                className="min-w-[120px]"
+                size="sm"
+                className="text-xs sm:text-sm px-3 sm:px-4"
               >
-                {category.label}
+                <span className="hidden sm:inline">{category.label}</span>
+                <span className="sm:hidden">{category.labelHi}</span>
               </Button>
             ))}
           </div>
         </AnimatedSection>
 
         {/* Menu Grid */}
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Category Image */}
-          <AnimatedSection animation="fade-right" className="lg:col-span-1">
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
+          {/* Category Image - Hidden on mobile, shown on tablet+ */}
+          <AnimatedSection animation="fade-right" className="hidden md:block lg:col-span-1">
             <img
               src={categoryImages[activeCategory]}
               alt={activeCategory}
@@ -105,15 +107,15 @@ const MenuSection = () => {
 
           {/* Menu Items */}
           <div className="lg:col-span-2">
-            <div className="grid sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {menuItems[activeCategory as keyof typeof menuItems].map((item, index) => (
                 <AnimatedSection key={index} animation="fade-up" delay={index * 50}>
-                  <div className="p-4 bg-card rounded-lg border border-border hover:border-secondary/50 transition-colors h-full">
-                    <div className="flex justify-between items-start mb-1">
-                      <h4 className="font-medium text-foreground">{item.name}</h4>
-                      <span className="text-secondary text-sm font-medium">{item.nameHi}</span>
+                  <div className="p-3 sm:p-4 bg-card rounded-lg border border-border hover:border-secondary/50 transition-colors h-full">
+                    <div className="flex justify-between items-start gap-2 mb-1">
+                      <h4 className="font-medium text-foreground text-sm sm:text-base">{item.name}</h4>
+                      <span className="text-secondary text-xs sm:text-sm font-medium flex-shrink-0">{item.nameHi}</span>
                     </div>
-                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">{item.description}</p>
                   </div>
                 </AnimatedSection>
               ))}
@@ -123,7 +125,7 @@ const MenuSection = () => {
 
         {/* Note */}
         <AnimatedSection animation="fade" delay={400}>
-          <p className="text-center text-muted-foreground mt-8 text-sm">
+          <p className="text-center text-muted-foreground mt-6 sm:mt-8 text-xs sm:text-sm">
             * Prices available at the counter. Fresh items made daily.
           </p>
         </AnimatedSection>
