@@ -1,4 +1,5 @@
 import { Star, Quote } from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 
 const reviews = [
   {
@@ -44,49 +45,50 @@ const ReviewsSection = () => {
     <section id="reviews" className="py-16 md:py-24 bg-warm-gradient">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-secondary font-medium uppercase tracking-wider text-sm">
-            Testimonials
-          </span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-4">
-            What Our Customers Say
-          </h2>
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 text-secondary fill-secondary" />
-              ))}
+        <AnimatedSection animation="fade-up">
+          <div className="text-center mb-12">
+            <span className="text-secondary font-medium uppercase tracking-wider text-sm">
+              Testimonials
+            </span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-4">
+              What Our Customers Say
+            </h2>
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-secondary fill-secondary" />
+                ))}
+              </div>
+              <span className="font-medium text-foreground">4.5</span>
+              <span className="text-muted-foreground">(77 Google Reviews)</span>
             </div>
-            <span className="font-medium text-foreground">4.5</span>
-            <span className="text-muted-foreground">(77 Google Reviews)</span>
           </div>
-        </div>
+        </AnimatedSection>
 
         {/* Reviews Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reviews.map((review, index) => (
-            <div
-              key={index}
-              className="bg-card p-6 rounded-lg shadow-sm border border-border hover:shadow-warm transition-shadow"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <Quote className="w-8 h-8 text-secondary/30" />
-                <span className="px-3 py-1 bg-secondary/10 text-secondary text-xs font-medium rounded-full">
-                  {review.highlight}
-                </span>
-              </div>
-              <p className="text-foreground/80 mb-4 leading-relaxed">
-                "{review.text}"
-              </p>
-              <div className="flex items-center justify-between">
-                <span className="font-medium text-foreground">{review.name}</span>
-                <div className="flex">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-secondary fill-secondary" />
-                  ))}
+            <AnimatedSection key={index} animation="fade-up" delay={index * 100}>
+              <div className="bg-card p-6 rounded-lg shadow-sm border border-border hover:shadow-warm transition-shadow h-full">
+                <div className="flex justify-between items-start mb-4">
+                  <Quote className="w-8 h-8 text-secondary/30" />
+                  <span className="px-3 py-1 bg-secondary/10 text-secondary text-xs font-medium rounded-full">
+                    {review.highlight}
+                  </span>
+                </div>
+                <p className="text-foreground/80 mb-4 leading-relaxed">
+                  "{review.text}"
+                </p>
+                <div className="flex items-center justify-between">
+                  <span className="font-medium text-foreground">{review.name}</span>
+                  <div className="flex">
+                    {[...Array(review.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 text-secondary fill-secondary" />
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            </AnimatedSection>
           ))}
         </div>
       </div>
