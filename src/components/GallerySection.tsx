@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 import heroSweets from "@/assets/hero-sweets.jpg";
 import restaurantInterior from "@/assets/restaurant-interior.jpg";
 import snacks from "@/assets/snacks.jpg";
@@ -45,40 +46,46 @@ const GallerySection = () => {
     <section id="gallery" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-secondary font-medium uppercase tracking-wider text-sm">
-            Our Gallery
-          </span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-4">
-            A Glimpse Inside
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Take a peek at our restaurant, freshly prepared sweets, and the warm ambiance that awaits you
-          </p>
-        </div>
+        <AnimatedSection animation="fade-up">
+          <div className="text-center mb-12">
+            <span className="text-secondary font-medium uppercase tracking-wider text-sm">
+              Our Gallery
+            </span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-4">
+              A Glimpse Inside
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Take a peek at our restaurant, freshly prepared sweets, and the warm ambiance that awaits you
+            </p>
+          </div>
+        </AnimatedSection>
 
         {/* Gallery Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
           {galleryImages.map((image, index) => (
-            <button
+            <AnimatedSection
               key={index}
-              onClick={() => openLightbox(index)}
-              className={`relative overflow-hidden rounded-lg group cursor-pointer ${
-                index === 0 ? "col-span-2 row-span-2" : ""
-              }`}
+              animation="zoom-in"
+              delay={index * 100}
+              className={index === 0 ? "col-span-2 row-span-2" : ""}
             >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
-                  index === 0 ? "h-64 md:h-96" : "h-32 md:h-48"
-                }`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-3 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-sm font-medium">{image.caption}</p>
-              </div>
-            </button>
+              <button
+                onClick={() => openLightbox(index)}
+                className="relative overflow-hidden rounded-lg group cursor-pointer w-full h-full"
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
+                    index === 0 ? "h-64 md:h-96" : "h-32 md:h-48"
+                  }`}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-sm font-medium">{image.caption}</p>
+                </div>
+              </button>
+            </AnimatedSection>
           ))}
         </div>
       </div>

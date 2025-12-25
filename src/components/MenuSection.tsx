@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import AnimatedSection from "@/components/AnimatedSection";
 import snacksImage from "@/assets/snacks.jpg";
 import heroSweets from "@/assets/hero-sweets.jpg";
 
@@ -61,66 +62,71 @@ const MenuSection = () => {
     <section id="menu" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="text-secondary font-medium uppercase tracking-wider text-sm">
-            Our Specialties
-          </span>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-4">
-            Explore Our Menu
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Discover our wide range of traditional sweets, savory snacks, and delicious fast food items
-          </p>
-        </div>
+        <AnimatedSection animation="fade-up">
+          <div className="text-center mb-12">
+            <span className="text-secondary font-medium uppercase tracking-wider text-sm">
+              Our Specialties
+            </span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-4">
+              Explore Our Menu
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Discover our wide range of traditional sweets, savory snacks, and delicious fast food items
+            </p>
+          </div>
+        </AnimatedSection>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {menuCategories.map((category) => (
-            <Button
-              key={category.id}
-              variant={activeCategory === category.id ? "default" : "outline"}
-              onClick={() => setActiveCategory(category.id)}
-              className="min-w-[120px]"
-            >
-              {category.label}
-            </Button>
-          ))}
-        </div>
+        <AnimatedSection animation="fade-up" delay={100}>
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {menuCategories.map((category) => (
+              <Button
+                key={category.id}
+                variant={activeCategory === category.id ? "default" : "outline"}
+                onClick={() => setActiveCategory(category.id)}
+                className="min-w-[120px]"
+              >
+                {category.label}
+              </Button>
+            ))}
+          </div>
+        </AnimatedSection>
 
         {/* Menu Grid */}
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Category Image */}
-          <div className="lg:col-span-1">
+          <AnimatedSection animation="fade-right" className="lg:col-span-1">
             <img
               src={categoryImages[activeCategory]}
               alt={activeCategory}
               className="w-full h-64 lg:h-full object-cover rounded-lg shadow-warm"
             />
-          </div>
+          </AnimatedSection>
 
           {/* Menu Items */}
           <div className="lg:col-span-2">
             <div className="grid sm:grid-cols-2 gap-4">
               {menuItems[activeCategory as keyof typeof menuItems].map((item, index) => (
-                <div
-                  key={index}
-                  className="p-4 bg-card rounded-lg border border-border hover:border-secondary/50 transition-colors"
-                >
-                  <div className="flex justify-between items-start mb-1">
-                    <h4 className="font-medium text-foreground">{item.name}</h4>
-                    <span className="text-secondary text-sm font-medium">{item.nameHi}</span>
+                <AnimatedSection key={index} animation="fade-up" delay={index * 50}>
+                  <div className="p-4 bg-card rounded-lg border border-border hover:border-secondary/50 transition-colors h-full">
+                    <div className="flex justify-between items-start mb-1">
+                      <h4 className="font-medium text-foreground">{item.name}</h4>
+                      <span className="text-secondary text-sm font-medium">{item.nameHi}</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
                   </div>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
-                </div>
+                </AnimatedSection>
               ))}
             </div>
           </div>
         </div>
 
         {/* Note */}
-        <p className="text-center text-muted-foreground mt-8 text-sm">
-          * Prices available at the counter. Fresh items made daily.
-        </p>
+        <AnimatedSection animation="fade" delay={400}>
+          <p className="text-center text-muted-foreground mt-8 text-sm">
+            * Prices available at the counter. Fresh items made daily.
+          </p>
+        </AnimatedSection>
       </div>
     </section>
   );
