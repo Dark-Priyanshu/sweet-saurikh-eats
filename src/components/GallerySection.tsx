@@ -43,30 +43,30 @@ const GallerySection = () => {
   };
 
   return (
-    <section id="gallery" className="py-16 md:py-24 bg-background">
+    <section id="gallery" className="py-12 sm:py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         {/* Header */}
         <AnimatedSection animation="fade-up">
-          <div className="text-center mb-12">
-            <span className="text-secondary font-medium uppercase tracking-wider text-sm">
+          <div className="text-center mb-8 sm:mb-12">
+            <span className="text-secondary font-medium uppercase tracking-wider text-xs sm:text-sm">
               Our Gallery
             </span>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold text-foreground mt-2 mb-3 sm:mb-4">
               A Glimpse Inside
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base px-4">
               Take a peek at our restaurant, freshly prepared sweets, and the warm ambiance that awaits you
             </p>
           </div>
         </AnimatedSection>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
           {galleryImages.map((image, index) => (
             <AnimatedSection
               key={index}
               animation="zoom-in"
-              delay={index * 100}
+              delay={index * 75}
               className={index === 0 ? "col-span-2 row-span-2" : ""}
             >
               <button
@@ -77,12 +77,12 @@ const GallerySection = () => {
                   src={image.src}
                   alt={image.alt}
                   className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${
-                    index === 0 ? "h-64 md:h-96" : "h-32 md:h-48"
+                    index === 0 ? "h-48 sm:h-64 md:h-80 lg:h-96" : "h-24 sm:h-32 md:h-40 lg:h-48"
                   }`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-sm font-medium">{image.caption}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-xs sm:text-sm font-medium">{image.caption}</p>
                 </div>
               </button>
             </AnimatedSection>
@@ -92,36 +92,36 @@ const GallerySection = () => {
 
       {/* Lightbox */}
       {lightboxOpen && (
-        <div className="fixed inset-0 z-[100] bg-foreground/95 flex items-center justify-center">
+        <div className="fixed inset-0 z-[100] bg-foreground/95 flex items-center justify-center p-4">
           {/* Close Button */}
           <button
             onClick={closeLightbox}
             className="absolute top-4 right-4 p-2 text-background hover:text-secondary transition-colors z-10"
             aria-label="Close gallery"
           >
-            <X className="w-8 h-8" />
+            <X className="w-6 h-6 sm:w-8 sm:h-8" />
           </button>
 
           {/* Previous Button */}
           <button
             onClick={goToPrevious}
-            className="absolute left-4 p-2 text-background hover:text-secondary transition-colors z-10"
+            className="absolute left-2 sm:left-4 p-1 sm:p-2 text-background hover:text-secondary transition-colors z-10"
             aria-label="Previous image"
           >
-            <ChevronLeft className="w-10 h-10" />
+            <ChevronLeft className="w-8 h-8 sm:w-10 sm:h-10" />
           </button>
 
           {/* Image */}
-          <div className="max-w-4xl max-h-[80vh] px-16">
+          <div className="max-w-4xl w-full max-h-[80vh] px-8 sm:px-16">
             <img
               src={galleryImages[currentIndex].src}
               alt={galleryImages[currentIndex].alt}
-              className="max-w-full max-h-[75vh] object-contain rounded-lg"
+              className="max-w-full max-h-[65vh] sm:max-h-[75vh] object-contain rounded-lg mx-auto"
             />
-            <p className="text-center text-background mt-4 text-lg">
+            <p className="text-center text-background mt-3 sm:mt-4 text-base sm:text-lg">
               {galleryImages[currentIndex].caption}
             </p>
-            <p className="text-center text-background/60 mt-1 text-sm">
+            <p className="text-center text-background/60 mt-1 text-xs sm:text-sm">
               {currentIndex + 1} / {galleryImages.length}
             </p>
           </div>
@@ -129,10 +129,10 @@ const GallerySection = () => {
           {/* Next Button */}
           <button
             onClick={goToNext}
-            className="absolute right-4 p-2 text-background hover:text-secondary transition-colors z-10"
+            className="absolute right-2 sm:right-4 p-1 sm:p-2 text-background hover:text-secondary transition-colors z-10"
             aria-label="Next image"
           >
-            <ChevronRight className="w-10 h-10" />
+            <ChevronRight className="w-8 h-8 sm:w-10 sm:h-10" />
           </button>
 
           {/* Click outside to close */}

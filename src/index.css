@@ -109,6 +109,34 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
   }
+
+  /* Safe area for notched phones */
+  .safe-area-inset-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent;
+  }
+
+  .bg-warm-gradient {
+    background: linear-gradient(135deg, hsl(var(--secondary) / 0.1) 0%, hsl(var(--primary) / 0.05) 100%);
+  }
+
+  .shadow-warm {
+    box-shadow: 0 4px 20px hsl(var(--primary) / 0.15);
+  }
+
+  .border-decorative {
+    border-image: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)), hsl(var(--primary))) 1;
+  }
+
+  /* Better mobile viewport height */
+  .min-h-screen-safe {
+    min-height: 100svh;
+  }
 }
 
 @layer utilities {
