@@ -10,6 +10,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import MobileFixedCTA from "@/components/MobileFixedCTA";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BackToTopButton from "@/components/BackToTopButton";
 
 const Index = () => {
   return (
@@ -72,6 +73,7 @@ const Index = () => {
         <Footer />
         <MobileFixedCTA />
         <WhatsAppButton />
+        <BackToTopButton />
       </main>
     </>
   );
